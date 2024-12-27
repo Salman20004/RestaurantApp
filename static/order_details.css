@@ -1,0 +1,85 @@
+/* Container for both boxes (menu and basket) */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Left Box: Your Basket */
+  .basket-box {
+    width: 45%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* In case the basket content is long */
+  }
+  
+  /* Right Box: Menu */
+  .menu-box {
+    width: 45%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the dish input box (readonly) */
+  .menu-box input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Buttons for adding, removing, and deleting dishes */
+  form button {
+    padding: 10px 15px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFDD44;  /* Button background color */
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #ffbb00;  /* Hover effect for buttons */
+  }
+  
+  /* Styling the "Back to Orders" button */
+  form button {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 20px;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  .box {
+    width: 600px; /* Set the desired width */
+    height: 300px; /* Set the desired height */
+    border: 2px solid #000;
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin: 20px auto; /* Center the box horizontally */
+}
+
+.button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}

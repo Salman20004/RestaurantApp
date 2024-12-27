@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App</title>
+    <link href="/static/new.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+      .hidden {
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h2>{{ message }}</h2>
+      <form method="POST" action="/">
+          <h1>Login</h1>
+          <div class="input-box">
+              <input type="text" name="username" placeholder="Username" required>
+              <i class='bx bxs-user'></i>
+          </div>
+          <div class="input-box">
+              <input type="password" name="password" placeholder="Password" required>
+              <i class='bx bxs-lock-alt'></i>
+          </div>
+          <button type="submit" class="btn">Login</button>
+
+          <div class="register-link">
+              <p>Don't have an account? <a href="javascript:void(0)" onclick="toggleRegister()">Register</a></p>
+          </div>
+      </form>
+
+      <!-- Hidden Register Form -->
+      <form id="register-form" method="POST" action="{{ url_for('register') }}" class="hidden">
+          <h1>Register</h1>
+          <div class="input-box">
+              <input type="text" name="new_username" placeholder="New Username" required>
+              <i class='bx bxs-user'></i>
+          </div>
+          <div class="input-box">
+              <input type="password" name="new_password" placeholder="New Password" required>
+              <i class='bx bxs-lock-alt'></i>
+          </div>
+          <button type="submit" class="btn">Register</button>
+      </form>
+  </div>
+    <script>
+      function toggleRegister() {
+          const registerForm = document.getElementById('register-form');
+          registerForm.classList.toggle('hidden');
+      }
+  </script>
+  </body>
+</html>

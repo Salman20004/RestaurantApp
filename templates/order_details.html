@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App</title>
+    <link href = "/static/order_details.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
+  </head>
+  <body>
+    
+
+    
+
+    <div class="container">
+      <!-- Left Box: Your Basket -->
+      <div class="basket-box">
+        <h2>Your Basket --  TOTAL: {{ orderAmount }}</h2>
+        <ul>
+          {% for dish in orderedDishes %}
+          <li>
+            {{ dish['DishName'] }} - {{ dish['price'] }} SAR - Quantity: {{ dish['Quantity'] }}
+            
+            <form action="/add_quantity" method="POST" style="display:inline;">
+              <input type="hidden" name="dishID" value="{{ dish['DishID'] }}">
+              <input type="hidden" name="orderID" value="{{ orderID }}">
+              <button type="submit">+</button>
+            </form>
+    
+            <form action="/delete_dish" method="POST" style="display:inline;">
+              <input type="hidden" name="dishID" value="{{ dish['DishID'] }}">
+              <input type="hidden" name="orderID" value="{{ orderID }}">
+              <button type="submit" style="background: url(/static/trash.png);">Delete</button>
+            </form>
+    
+            <form action="/sub_quantity" method="POST" style="display:inline;">
+              <input type="hidden" name="dishID" value="{{ dish['DishID'] }}">
+              <input type="hidden" name="orderID" value="{{ orderID }}">
+              <button type="submit">-</button>
+            </form>
+          </li>
+          {% endfor %}
+
+
+         
+        </ul>
+      </div>
+    
+      <div class="menu-box">
+        <h2>All Dishes</h2>
+        <ul style="list-style-type: none; padding: 0;">
+          {% for dish in alldishes %}
+          <li>
+            <form action="{{ url_for('add_dish')}}" method="POST" style="display: flex; align-items: center; gap: 10px;">
+              <input type="hidden" name="dishID" value="{{ dish['DishID'] }}">
+              <input type="hidden" name="orderID" value="{{ orderID }}">
+              
+              <!-- Input Box for Dish Name -->
+              <input 
+                type="text" 
+                name="dishName" 
+                value="{{ dish['DishName'] }}" 
+                readonly 
+                style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+      
+              <!-- Button -->
+              <button type="submit" class="button">
+                Add
+              </button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      
+    
+      <div style="display: flex; justify-content: space-between; position: fixed; bottom: 20%; left: 0; width: 100%; background-color: #f8f9fa; padding: 10px;">
+        <!-- Back to Orders Button -->
+        <form action="{{ url_for('user_orders') }}" style="flex: 1; margin-right: 10px;">
+          <button style="width: 100%; padding: 15px; border: none; background-color: #007BFF; color: white; font-size: 16px; border-radius: 5px; cursor: pointer;">
+            Back to Orders
+          </button>
+        </form>
+      
+        <!-- Deliver Button -->
+        <form action="/add_driver" method="POST" style="flex: 1;">
+          <input type="hidden" name="orderID" value="{{ orderID }}">
+          <button class="submit" style="width: 100%; padding: 15px; border: none; background-color: #28a745; color: white; font-size: 16px; border-radius: 5px; cursor: pointer;">
+            DELIVER
+          </button>
+        </form>
+      </div>
+      
+  
+
+
+
+
+    
+</body>
+
+</html>

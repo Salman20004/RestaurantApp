@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App</title>
+    <link href = "/static/orders.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
+  </head>
+  <body>
+
+
+    <div class="search-container">
+      <h2>Search Orders by Restaurant</h2>
+      <form action="/user_orders" method="POST">
+        <div class="search-bar">
+          <input type="text" name="search" placeholder="Enter restaurant name...">
+          <button type="submit">Submit</button>
+        </div>
+      </form>  
+    </div>
+
+
+
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
+      <!-- First Button -->
+      <form action="/user_orders" style="flex: 1;">
+        <button class="btn" style="width: 100%; padding: 15px; border: none; background-color: #007BFF; color: white; font-size: 16px; border-radius: 5px; cursor: pointer;">
+          ORIGINAL
+        </button>
+      </form>
+    
+      <!-- Second Button -->
+      <form action="{{url_for('home')}}" method="POST" style="flex: 1;">
+        <button class="btn" style="width: 100%; padding: 15px; border: none; background-color: #28a745; color: white; font-size: 16px; border-radius: 5px; cursor: pointer;">
+          LOG OUT
+        </button>
+      </form>
+    </div>
+    
+
+
+
+    
+      <form action="/adding" method="POST">
+        <input type="hidden" name = "restaurantID" value={{1}}>
+        <button type="submit"  style="padding: 0; border: none; background: none;">
+          <div class="restaurant-card">
+            <div class="restaurant-image">
+              <img src="/static/piato.jpg" alt="Piato Image" class="image">
+            </div>
+            <div class="restaurant-info">
+              <div class="restaurant-name">PIATO</div>
+              <div class="restaurant-rating">
+                <span class="star">★ 4.5</span> 
+                <span class="reviews">(2644)</span>
+              </div>
+            </div>
+            <div class="premium">
+              <span>ADD</span>
+            </div>
+          </div>
+        </button>
+      </form>
+    </div>
+
+   
+    <form action="/adding" method="POST">
+      <input type="hidden" name = "restaurantID" value={{2}}>
+      <button type="submit"  style="padding: 0; border: none; background: none;">
+        <div class="restaurant-card">
+          <div class="restaurant-image">
+            <img src="/static/macdonalds.png" alt="MacDonald's Image" class="image">
+          </div>
+          <div class="restaurant-info">
+            <div class="restaurant-name">Mackdonlds</div>
+            <div class="restaurant-rating">
+              <span class="star">★ 4.7</span> 
+              <span class="reviews">(3000)</span>
+            </div>
+          </div>
+          <div class="premium">
+            <span>ADD</span>
+          </div>
+        </div>
+      </button>
+    </form>
+  </div>
+  
+
+  <form action="/adding" method="POST">
+    <input type="hidden" name = "restaurantID" value={{3}}>
+    <button type="submit"  style="padding: 0; border: none; background: none;">
+      <div class="restaurant-card">
+        <div class="restaurant-image">
+          <img src="/static/shawerma.png" alt="shawerma Image" class="image">
+        </div>
+        <div class="restaurant-info">
+          <div class="restaurant-name">Shawerma</div>
+          <div class="restaurant-rating">
+            <span class="star">★ 4.7</span> 
+            <span class="reviews">(3000)</span>
+          </div>
+        </div>
+        <div class="premium">
+          <span>ADD</span>
+        </div>
+      </div>
+    </button>
+  </form>
+</div>
+
+<form action="/adding" method="POST">
+  <input type="hidden" name = "restaurantID" value={{4}}>
+  <button type="submit"  style="padding: 0; border: none; background: none;">
+    <div class="restaurant-card">
+      <div class="restaurant-image">
+        <img src="/static/albaik.png" alt="shawerma Image" class="image">
+      </div>
+      <div class="restaurant-info">
+        <div class="restaurant-name">Shawerma</div>
+        <div class="restaurant-rating">
+          <span class="star">★ 4.7</span> 
+          <span class="reviews">(3000)</span>
+        </div>
+      </div>
+      <div class="premium">
+        <span>ADD</span>
+      </div>
+    </div>
+  </button>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+<ul class="orders-list">
+  {% for order in orders %}
+  <li class="order-item">
+    <div class="order-info">
+      <span class="order-index">{{ loop.index }}</span>
+      <span class="order-details">Order ID: {{ order['OrderID'] }} {{order['RestaurantName']}}//</span>
+      {% if order['DriverID'] %}
+      delivering...
+      {% endif %}
+    </div>
+
+    <div class="order-actions">
+      <form action="/details" method="POST" class="order-form">
+        <input type="hidden" name="order_id" value="{{ order['OrderID'] }}">
+        <button type="submit" class="action-button edit-button">Edit Order</button>
+      </form>
+
+      <form action="/deleting" method="POST" class="order-form">
+        <input type="hidden" name="order_id" value="{{ order['OrderID'] }}">
+        <button type="submit" class="action-button delete-button">Delete</button>
+      </form>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+    
+</body>
+
+</html>
